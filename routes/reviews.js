@@ -43,6 +43,22 @@ router.put(
   '/:id',
   /* #swagger.tags = ['Reviews']
      #swagger.summary = 'Update a review'
+     #swagger.parameters['id'] = {
+       in: 'path',
+       description: 'Review id',
+       required: true,
+       type: 'string'
+     }
+     #swagger.parameters['body'] = {
+       in: 'body',
+       required: true,
+       schema: {
+         movieId: '660f0f6b8d9f4b3f20f9a123',
+         reviewer: 'Bruno',
+         comment: 'Updated review comment',
+         score: 8
+       }
+     }
   */
   validation.saveReview,
   reviewController.updateReview
