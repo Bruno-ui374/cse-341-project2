@@ -1,0 +1,37 @@
+{
+  "name": "cse-341-project2",
+  "version": "1.0.0",
+  "description": "My second Project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "swagger": "node swagger.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bruno-ui374/cse-341-project2.git"
+  },
+  "keywords": [],
+  "author": "Bruno Martin Ssematimba",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Bruno-ui374/cse-341-project2/issues"
+  },
+  "homepage": "https://github.com/Bruno-ui374/cse-341-project2#readme",
+  "dependencies": {
+    "body-parser": "^2.2.2",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "mongodb": "^7.1.1",
+    "mongoose": "^9.3.3",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1",
+    "validatorjs": "^3.22.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
