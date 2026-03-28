@@ -358,16 +358,31 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "description": "Review id"
           },
           {
             "name": "body",
             "in": "body",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "movieId": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "660f0f6b8d9f4b3f20f9a123"
+                },
+                "reviewer": {
+                  "type": "string",
+                  "example": "Bruno"
+                },
+                "comment": {
+                  "type": "string",
+                  "example": "Updated review comment"
+                },
+                "score": {
+                  "type": "number",
+                  "example": 8
                 }
               }
             }
@@ -386,7 +401,8 @@
           "500": {
             "description": "Internal Server Error"
           }
-        }
+        },
+        "autoBody": false
       },
       "delete": {
         "tags": [

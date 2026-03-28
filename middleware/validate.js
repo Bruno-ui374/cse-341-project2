@@ -1,9 +1,9 @@
-const validate = require('./validator');
+const Validator = require('validatorjs');
 const movieRules = require('../validators/movieRules');
 const reviewRules = require('../validators/reviewRules');
 
 const runValidation = (payload, rules, res, next) => {
-  const validation = validate(payload, rules);
+  const validation = new Validator(payload, rules);
 
   if (validation.fails()) {
     return res.status(400).json({ errors: validation.errors.all() });

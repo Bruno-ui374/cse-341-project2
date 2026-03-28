@@ -43,6 +43,7 @@ router.put(
   '/:id',
   /* #swagger.tags = ['Reviews']
      #swagger.summary = 'Update a review'
+     #swagger.autoBody = false
      #swagger.parameters['id'] = {
        in: 'path',
        description: 'Review id',
