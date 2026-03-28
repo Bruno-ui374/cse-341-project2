@@ -6,7 +6,7 @@ const doc = {
     title: 'Movie API',
     description: 'CRUD API for movies and reviews'
   },
-  host: process.env.SWAGGER_HOST || 'localhost:3000',
+  host: (process.env.SWAGGER_HOST || 'localhost:3000').replace(/^https?:\/\//i, ''),
   schemes: [process.env.SWAGGER_SCHEMES || 'http']
 };
 
