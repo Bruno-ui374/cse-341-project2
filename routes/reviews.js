@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const reviewController = require('../controllers/reviewController');
+const validation = require('../middleware/validate');
 
 router.get(
   '/',
@@ -34,6 +35,7 @@ router.post(
        }
      }
   */
+  validation.saveReview,
   reviewController.createReviewForMovie
 );
 
@@ -42,6 +44,7 @@ router.put(
   /* #swagger.tags = ['Reviews']
      #swagger.summary = 'Update a review'
   */
+  validation.saveReview,
   reviewController.updateReview
 );
 

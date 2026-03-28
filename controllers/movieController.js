@@ -1,11 +1,9 @@
 const mongoose = require('mongoose');
 const Movie = require('../models/movie');
-const validate = require('../middleware/validator');
-const movieRules = require('../validators/movieRules');
 
 exports.getAllMovies = async (req, res) => {
   try {
-    const movies = await Movie.find().select('-createdAt -updatedAt');
+    const movies = await Movie.find().select('-createdAt -updatedAt -__v');
     res.status(200).json(movies);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -18,7 +16,7 @@ exports.getMovieById = async (req, res) => {
       return res.status(400).json({ message: 'Invalid movie ID' });
     }
 
-    const movie = await Movie.findById(req.params.id).select('-createdAt -updatedAt');
+    const movie = await Movie.findById(req.params.id).select('-createdAt -updatedAt -__v');
 
     if (!movie) {
       return res.status(404).json({ message: 'Movie not found' });
@@ -32,16 +30,11 @@ exports.getMovieById = async (req, res) => {
 
 exports.createMovie = async (req, res) => {
   try {
-    const validation = validate(req.body, movieRules);
-
-    if (validation.fails()) {
-      return res.status(400).json({ errors: validation.errors.all() });
-    }
-
     const movie = await Movie.create(req.body);
     const movieResponse = movie.toObject();
     delete movieResponse.createdAt;
     delete movieResponse.updatedAt;
+    delete movieResponse.__v;
     res.status(201).json(movieResponse);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -54,16 +47,10 @@ exports.updateMovie = async (req, res) => {
       return res.status(400).json({ message: 'Invalid movie ID' });
     }
 
-    const validation = validate(req.body, movieRules);
-
-    if (validation.fails()) {
-      return res.status(400).json({ errors: validation.errors.all() });
-    }
-
     const movie = await Movie.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
-    }).select('-createdAt -updatedAt');
+    }).select('-createdAt -updatedAt -__v');
 
     if (!movie) {
       return res.status(404).json({ message: 'Movie not found' });

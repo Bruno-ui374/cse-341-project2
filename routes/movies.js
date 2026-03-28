@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const movieController = require('../controllers/movieController');
+const validation = require('../middleware/validate');
 
 router.get(
   '/',
@@ -39,6 +40,7 @@ router.post(
        }
      }
   */
+  validation.saveMovie,
   movieController.createMovie
 );
 
@@ -66,6 +68,7 @@ router.put(
        }
      }
   */
+  validation.saveMovie,
   movieController.updateMovie
 );
 
