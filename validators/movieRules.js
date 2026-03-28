@@ -5,8 +5,7 @@ const movieRules = {
   director: 'required|string|max:100',
   duration: 'required|numeric|min:1',
   rating: 'required|numeric|min:1|max:10',
-  description: 'required|string',
-  posterUrl: 'sometimes|string'
+  description: 'required|string'
 };
 
 module.exports = movieRules;

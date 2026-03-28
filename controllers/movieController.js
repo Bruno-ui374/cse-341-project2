@@ -5,7 +5,7 @@ const movieRules = require('../validators/movieRules');
 
 exports.getAllMovies = async (req, res) => {
   try {
-    const movies = await Movie.find();
+    const movies = await Movie.find().select('-createdAt');
     res.status(200).json(movies);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -18,7 +18,7 @@ exports.getMovieById = async (req, res) => {
       return res.status(400).json({ message: 'Invalid movie ID' });
     }
 
-    const movie = await Movie.findById(req.params.id);
+    const movie = await Movie.findById(req.params.id).select('-createdAt');
 
     if (!movie) {
       return res.status(404).json({ message: 'Movie not found' });
@@ -39,7 +39,9 @@ exports.createMovie = async (req, res) => {
     }
 
     const movie = await Movie.create(req.body);
-    res.status(201).json(movie);
+    const movieResponse = movie.toObject();
+    delete movieResponse.createdAt;
+    res.status(201).json(movieResponse);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -60,7 +62,7 @@ exports.updateMovie = async (req, res) => {
     const movie = await Movie.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
-    });
+    }).select('-createdAt');
 
     if (!movie) {
       return res.status(404).json({ message: 'Movie not found' });

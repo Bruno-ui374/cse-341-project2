@@ -35,8 +35,7 @@ router.post(
          director: 'Christopher Nolan',
          duration: 148,
          rating: 9,
-         description: 'A thief enters dreams to steal secrets.',
-        
+         description: 'A thief enters dreams to steal secrets.'
        }
      }
   */
@@ -63,7 +62,7 @@ router.put(
          director: 'Christopher Nolan',
          duration: 148,
          rating: 9,
-         description: 'A thief enters dreams to steal secrets.',
+         description: 'A thief enters dreams to steal secrets.'
        }
      }
   */

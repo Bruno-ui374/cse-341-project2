@@ -5,10 +5,10 @@
     "description": "CRUD API for movies and reviews",
     "version": "1.0.0"
   },
-  "host": "https://cse-341-project2-f1bx.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/": {
@@ -173,10 +173,6 @@
                 "description": {
                   "type": "string",
                   "example": "A thief enters dreams to steal secrets."
-                },
-                "posterUrl": {
-                  "type": "string",
-                  "example": "https://example.com/poster.jpg"
                 }
               }
             }

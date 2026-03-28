@@ -8,10 +8,11 @@ const movieSchema = new mongoose.Schema(
     director: { type: String, required: true },
     duration: { type: Number, required: true },
     rating: { type: Number, required: true, min: 1, max: 10 },
-    description: { type: String, required: true },
-    posterUrl: { type: String }
+    description: { type: String, required: true }
   },
-  { timestamps: true }
+  {
+    timestamps: { createdAt: false, updatedAt: true }
+  }
 );
 
 module.exports = mongoose.model('Movie', movieSchema);
