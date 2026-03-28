@@ -11,7 +11,7 @@ const movieSchema = new mongoose.Schema(
     description: { type: String, required: true }
   },
   {
-    timestamps: { createdAt: false, updatedAt: true }
+    timestamps: false
   }
 );
 
