@@ -1,11 +1,21 @@
-const errorHandler = (err, req, res, next) => {
+function errorHandler(err, req, res, next) {
   console.error(err);
 
-  const statusCode = res.statusCode && res.statusCode !== 200 ? res.statusCode : 500;
+  if (res.headersSent) {
+    return next(err);
+  }
 
-  res.status(statusCode).json({
-    message: err.message || 'Server Error'
+  if (err.name === 'ValidationError') {
+    return res.status(400).json({ error: err.message });
+  }
+
+  if (err.name === 'CastError') {
+    return res.status(400).json({ error: 'Invalid ID format.' });
+  }
+
+  return res.status(err.statusCode || 500).json({
+    error: err.message || 'Internal server error.'
   });
-};
+}
 
 module.exports = errorHandler;

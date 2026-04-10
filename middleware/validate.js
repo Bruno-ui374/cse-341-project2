@@ -1,25 +1,25 @@
-const Validator = require('validatorjs');
-const movieRules = require('../validators/movieRules');
-const reviewRules = require('../validators/reviewRules');
+const saveMovie = (req, res, next) => {
+  const { title, director, year } = req.body;
 
-const runValidation = (payload, rules, res, next) => {
-  const validation = new Validator(payload, rules);
-
-  if (validation.fails()) {
-    return res.status(400).json({ errors: validation.errors.all() });
+  if (!title || !director || !year) {
+    return res.status(400).json({ error: 'Missing required movie fields' });
   }
 
   next();
 };
 
-const saveMovie = (req, res, next) => runValidation(req.body, movieRules, res, next);
-
 const saveReview = (req, res, next) => {
-  const payload = req.params.movieId
-    ? { ...req.body, movieId: req.params.movieId }
-    : req.body;
+  const { rating, comment } = req.body;
 
-  return runValidation(payload, reviewRules, res, next);
+  if (!rating || rating < 1 || rating > 5) {
+    return res.status(400).json({ error: 'Rating must be between 1 and 5' });
+  }
+
+  if (!comment) {
+    return res.status(400).json({ error: 'Comment is required' });
+  }
+
+  next();
 };
 
 module.exports = {

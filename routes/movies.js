@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
+
 const movieController = require('../controllers/movieController');
 const validation = require('../middleware/validate');
+const { isAuthenticated } = require('../middleware/auth');
 
 router.get(
   '/',
@@ -11,78 +13,30 @@ router.get(
 
 router.get(
   '/:id',
-  /* #swagger.tags = ['Movies']
-     #swagger.parameters['id'] = {
-       in: 'path',
-       description: 'Movie id',
-       required: true,
-       type: 'string'
-     }
-  */
+  /* #swagger.tags = ['Movies'] #swagger.parameters['id'] = { in: 'path', description: 'Movie id', required: true, type: 'string' } */
   movieController.getMovieById
 );
 
 router.post(
   '/',
-  /* #swagger.tags = ['Movies']
-     #swagger.summary = 'Create a movie'
-     #swagger.parameters['body'] = {
-       in: 'body',
-       required: true,
-       schema: {
-         title: 'Inception',
-         year: 2010,
-         genre: 'Sci-Fi',
-         director: 'Christopher Nolan',
-         duration: 148,
-         rating: 9,
-         description: 'A thief enters dreams to steal secrets.'
-       }
-     }
-  */
+  isAuthenticated,
+  /* #swagger.tags = ['Movies'] #swagger.summary = 'Create a movie' #swagger.security = [{ "sessionAuth": [] }] */
   validation.saveMovie,
   movieController.createMovie
 );
 
 router.put(
   '/:id',
-  /* #swagger.tags = ['Movies']
-     #swagger.summary = 'Update a movie'
-     #swagger.parameters['id'] = {
-       in: 'path',
-       description: 'Movie id',
-       required: true,
-       type: 'string'
-     }
-     #swagger.parameters['body'] = {
-       in: 'body',
-       required: true,
-       schema: {
-         title: 'Inception',
-         year: 2010,
-         genre: 'Sci-Fi',
-         director: 'Christopher Nolan',
-         duration: 148,
-         rating: 9,
-         description: 'A thief enters dreams to steal secrets.'
-       }
-     }
-  */
+  isAuthenticated,
+  /* #swagger.tags = ['Movies'] #swagger.summary = 'Update a movie' #swagger.security = [{ "sessionAuth": [] }] */
   validation.saveMovie,
   movieController.updateMovie
 );
 
 router.delete(
   '/:id',
-  /* #swagger.tags = ['Movies']
-     #swagger.summary = 'Delete a movie'
-     #swagger.parameters['id'] = {
-       in: 'path',
-       description: 'Movie id',
-       required: true,
-       type: 'string'
-     }
-  */
+  isAuthenticated,
+  /* #swagger.tags = ['Movies'] #swagger.summary = 'Delete a movie' #swagger.security = [{ "sessionAuth": [] }] */
   movieController.deleteMovie
 );
 
